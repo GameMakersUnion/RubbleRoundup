@@ -7,11 +7,20 @@ categories
 * asterisks: developer
 • bullets: artist
 
+specifications
+//////////////
+# 3:4 ratio, vanishing point 1 full screen height away from horizon
+# 5 seconds for an item that goes by the screen
+# objects begin on the horizon/bottom and scroll to other while scaling
+
 
 targets
 ///////
 
-* object moving along a path linearly only
+* perspective game, horizon originates at middle
+* objects move along linear paths originating from point offscreen
+
+* uses uv-mapped objects 
 * able to grab adjacent things and put inside
 • pickupables
 * timed button presses, phases of deployment and pickup
