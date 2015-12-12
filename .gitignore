@@ -20,6 +20,10 @@
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 
+
+### Unity VS ###
+Assets/UnityVS/
+
 # =========================
 # Operating System Files
 # =========================
