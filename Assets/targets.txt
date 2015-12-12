@@ -1,0 +1,25 @@
+approximate ordered phases of development
+=========================================
+
+categories
+//////////
+- dashes: general/undecided
+* asterisks: developer
+• bullets: artist
+
+
+targets
+///////
+
+* object moving along a path linearly only
+* able to grab adjacent things and put inside
+• pickupables
+* timed button presses, phases of deployment and pickup
+- moving arm 
+	*• discuss segments
+- street start / end points
+- upgrades
+	* more multifaceted vehicles
+- hit cars, run over cars, pick up cars
+- move around cars, vehicle gradually returns to path
+	* cars
