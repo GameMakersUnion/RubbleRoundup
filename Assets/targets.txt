@@ -10,9 +10,10 @@ categories
 specifications
 //////////////
 # 3:4 ratio, vanishing point 1 full screen height away from horizon
+# image resolution is powers of 2
+# generally images to be kept at 1024x1024, but can double
 # 5 seconds for an item that goes by the screen
 # objects begin on the horizon/bottom and scroll to other while scaling
-
 
 targets
 ///////
