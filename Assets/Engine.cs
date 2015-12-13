@@ -5,6 +5,8 @@ public class Engine : MonoBehaviour {
 
 	public static Engine Main;
 
+	private static uint NumRoads = 0;
+
 	//drag and drop road textures in here, for rapid testing
 	public Texture2D[] lanes;
 	public Texture2D[] curbs;
@@ -56,6 +58,7 @@ public class Engine : MonoBehaviour {
 
 			float distance = roadBounds.extents.x;
 			cs.CenterCamera(target, Player.Main.transform.forward * distance);
+			Player.Main.transform.position = target;
 
 		}
 	}
@@ -101,6 +104,8 @@ public class Engine : MonoBehaviour {
 		}
 
 		Road newRoad = Instantiate<Road>(roadPrefab);
+		newRoad.name += "_" + NumRoads.ToString();
+		NumRoads++;
 		newRoad.Init();
 		if(farthestPosition == null)
 		{

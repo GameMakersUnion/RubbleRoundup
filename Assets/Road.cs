@@ -6,25 +6,9 @@ public class Road : MonoBehaviour
 {
 	public Lane lanePrefab;
 
-	public static Road ActiveRoad
-	{
-		get
-		{
-			Road retVal = null;
-			Road[] roads = GameObject.FindObjectsOfType<Road>();
-			foreach(var road in roads)
-			{
-				if(road.Contains(Player.Main.transform.position))
-				{
-					retVal = road;
-					break;
-				}
-			}
-			return retVal;
-		}
-	}
+	public static Road ActiveRoad { get; private set; }
 
-	public bool Contains(Vector3 position)
+	public Lane Contains(Vector3 position)
 	{
 		foreach(var lane in lanes)
 		{
@@ -33,11 +17,11 @@ public class Road : MonoBehaviour
 			{
 				if(sr.bounds.Contains(position))
 				{
-					return true;
+					return lane;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public float RoadWidth
@@ -106,6 +90,39 @@ public class Road : MonoBehaviour
 		}
 	}
 
+	public Bounds DrivableRoadBounds
+	{
+		get
+		{
+			Bounds retVal = new Bounds(Vector3.zero, Vector3.zero);
+			if (lanes.Count > 0)
+			{
+				bool assigned = false;
+
+				foreach (var lane in lanes)
+				{
+					if (lane.type == Lane.LaneType.Street)
+					{
+						SpriteRenderer sr = lane.gameObject.GetComponent<SpriteRenderer>();
+						if (sr)
+						{
+							if (assigned)
+							{
+								retVal.Encapsulate(sr.bounds);
+							}
+							else
+							{
+								retVal = sr.bounds;
+								assigned = true;
+							}
+						}
+					}
+				}
+			}
+			return retVal;
+		}
+	}
+
 	private List<Lane> lanes = new List<Lane>();
 
 
@@ -125,27 +142,34 @@ public class Road : MonoBehaviour
 					lane.transform.parent = transform;
 					lane.laneIndex = i;
 					Texture2D texture;
+					Lane.LaneType type;
 					if(i == 0)
 					{
 						texture = Engine.Main.curbs[0];
+						type = Lane.LaneType.Curb;
 					}
 					else if(i == 1)
 					{
 						texture = Engine.Main.lanes[0];
+						type = Lane.LaneType.Street;
 					}
 					else if(i == numLanes - 1)
 					{
 						texture = Engine.Main.curbs[1];
+						type = Lane.LaneType.Curb;
 					}
 					else if(i == numLanes - 2)
 					{
 						texture = Engine.Main.lanes[2];
+						type = Lane.LaneType.Street;
 					}
 					else
 					{
 						texture = Engine.Main.lanes[1];
+						type = Lane.LaneType.Street;
 					}
 					sr.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+					lane.type = type;
 					lane.transform.position = new Vector3(lastX + sr.bounds.extents.x, transform.position.y, transform.position.z);
 					lanes.Add(lane);
 					lastX = sr.bounds.max.x;
@@ -169,10 +193,23 @@ public class Road : MonoBehaviour
 		transform.Translate(0, -Player.Main.driveSpeed * Time.deltaTime, 0);
 	}
 
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if(col.gameObject == Player.Main.gameObject)
+		{
+			ActiveRoad = this;
+		}
+	}
+
 	void OnTriggerExit2D(Collider2D col)
 	{
 		if(col.gameObject == Player.Main.gameObject)
 		{
+			if(ActiveRoad == this)
+			{
+				ActiveRoad = null;
+			}
+
 			Engine.Main.SignalRoadDestroyed();
 			Destroy(this.gameObject, 5f);
 		}
