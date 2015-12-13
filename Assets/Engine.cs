@@ -3,108 +3,118 @@ using System.Collections;
 
 public class Engine : MonoBehaviour {
 
-    public static Engine Main;
+	public static Engine Main;
 
-    //drag and drop road textures in here, for rapid testing
-    public Texture2D[] lanes;
-    public Texture2D[] curbs;
-    public Texture2D[] loots;
+	//drag and drop road textures in here, for rapid testing
+	public Texture2D[] lanes;
+	public Texture2D[] curbs;
+	public Texture2D[] loots;
 
-    public Road roadPrefab; //empty object responsible for making lanes
+	public Road roadPrefab; //empty object responsible for making lanes
 
-    public int numberOfLanes = 5;
-    public int numberOfRoadsBuffered = 3;
-
-    public Vector3 CameraTarget { get; private set; }
+	public int numberOfLanes = 5;
+	public int numberOfRoadsBuffered = 3;
 
 	void Awake () 
-    {
-        if(Main == null)
-        {
-            Main = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+	{
+		if(Main == null)
+		{
+			Main = this;
+		}
+		else
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
-    void OnDestroy()
-    {
-        if(Main == this)
-        {
-            Main = null;
-        }
-    }
+	void OnDestroy()
+	{
+		if(Main == this)
+		{
+			Main = null;
+		}
+	}
 	
 	void Start () 
-    {
-        for (int i = 0; i < numberOfRoadsBuffered; i++)
-        {
-            CreateNewRoadAhead();
-        }
+	{
+		Road road = null;
+		for (int i = 0; i < numberOfRoadsBuffered; i++)
+		{
+			Road temp = CreateNewRoadAhead();
+			if (road == null)
+			{
+				road = temp;
+			}
+		}
 
-        LookCam lookCam = Player.Main.GetComponent<LookCam>();
-        if(lookCam)
-        {
-            lookCam.SetCamera();
-        }
-    }
+		CameraSetter cs = Camera.main.gameObject.GetComponent<CameraSetter>();
+		if(cs && road)
+		{
+			Bounds roadBounds = road.RoadBounds;
+			Vector3 target = roadBounds.center;
+			target.y = Player.Main.transform.position.y;
 
-    [ExecuteInEditMode]
-    void OnValidate()
-    {
-        if(numberOfLanes < 4)
-        {
-            numberOfLanes = 4;
-        }
+			float distance = roadBounds.extents.x;
+			cs.CenterCamera(target, Player.Main.transform.forward * distance);
 
-        if(numberOfRoadsBuffered < 1)
-        {
-            numberOfRoadsBuffered = 1;
-        }
-    }
+		}
+	}
 
-    public void SignalRoadDestroyed()
-    {
-        CreateNewRoadAhead();
-        CreateLoot();
-    }
+	[ExecuteInEditMode]
+	void OnValidate()
+	{
+		if(numberOfLanes < 4)
+		{
+			numberOfLanes = 4;
+		}
 
-    private void CreateNewRoadAhead()
-    {
-        Road[] roadObjects = GameObject.FindObjectsOfType<Road>();
-        Vector3? farthestPosition = null;
-        float length = 0;
-        float width = 0;
+		if(numberOfRoadsBuffered < 1)
+		{
+			numberOfRoadsBuffered = 1;
+		}
+	}
 
-        if (roadObjects.Length > 0)
-        {
-            foreach (var road in roadObjects)
-            {
-                if (farthestPosition == null || road.transform.position.y > farthestPosition.Value.y)
-                {
-                    farthestPosition = road.transform.position;
-                    length = road.RoadLength;
-                    width = road.RoadWidth;
-                }
-            }
-        }
+	public void SignalRoadDestroyed()
+	{
+		CreateNewRoadAhead();
+		CreateLoot();
+	}
 
-        Road newRoad = Instantiate<Road>(roadPrefab);
-        newRoad.numLanes = 5;
-        newRoad.Init();
-        if(farthestPosition == null)
-        {
-            width = newRoad.RoadWidth;
-            farthestPosition = Player.Main.transform.position + new Vector3(-width/2, 0, 0);
-        }
-        newRoad.transform.position = new Vector3(farthestPosition.Value.x, farthestPosition.Value.y + length, farthestPosition.Value.z);
-    }
+	private Road CreateNewRoadAhead()
+	{
+		Road[] roadObjects = GameObject.FindObjectsOfType<Road>();
+		Vector3? farthestPosition = null;
+		float length = 0;
+		float width = 0;
 
-    void CreateLoot()
-    {
-        Road[] roadObjects = GameObject.FindObjectsOfType<Road>();
+		if (roadObjects.Length > 0)
+		{
+			foreach (var road in roadObjects)
+			{
+				if (farthestPosition == null || road.transform.position.y > farthestPosition.Value.y)
+				{
+					farthestPosition = road.transform.position;
+					length = road.RoadLength;
+					width = road.RoadWidth;
+				}
+			}
+		}
 
-    }
+		Road newRoad = Instantiate<Road>(roadPrefab);
+		newRoad.Init();
+		if(farthestPosition == null)
+		{
+			width = newRoad.RoadWidth;
+			farthestPosition = Player.Main.transform.position + new Vector3(-width/2, 0, 0);
+		}
+		newRoad.transform.position = new Vector3(farthestPosition.Value.x, farthestPosition.Value.y + length, farthestPosition.Value.z);
+
+		return newRoad;
+	}
+
+	void CreateLoot()
+	{
+		Road[] roadObjects = GameObject.FindObjectsOfType<Road>();
+
+	}
 }
