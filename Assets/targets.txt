@@ -1,35 +1,8 @@
-approximate ordered phases of development
-=========================================
+responsibilities:
+=================
 
-categories
-//////////
-- dashes: general/undecided
-* asterisks: developer
-• bullets: artist
-
-specifications
-//////////////
-# 3:4 ratio, vanishing point 1 full screen height away from horizon
-# image resolution is powers of 2
-# generally images to be kept at 1024x1024, but can double
-# 5 seconds for an item that goes by the screen
-# objects begin on the horizon/bottom and scroll to other while scaling
-
-targets
-///////
-
-* perspective game, horizon originates at middle
-* objects move along linear paths originating from point offscreen
-
-* uses uv-mapped objects 
-* able to grab adjacent things and put inside
-• pickupables
-* timed button presses, phases of deployment and pickup
-- moving arm 
-	*• discuss segments
-- street start / end points
-- upgrades
-	* more multifaceted vehicles
-- hit cars, run over cars, pick up cars
-- move around cars, vehicle gradually returns to path
-	* cars
+- movement horizontally constrained to lanes
+- picking up things
+- item apperance
+	- collision with vehical
+- level complete

@@ -68,6 +68,7 @@ public class Engine : MonoBehaviour {
     public void SignalRoadDestroyed()
     {
         CreateNewRoadAhead();
+        CreateLoot();
     }
 
     private void CreateNewRoadAhead()
@@ -99,5 +100,11 @@ public class Engine : MonoBehaviour {
             farthestPosition = Player.Main.transform.position + new Vector3(-width/2, 0, 0);
         }
         newRoad.transform.position = new Vector3(farthestPosition.Value.x, farthestPosition.Value.y + length, farthestPosition.Value.z);
+    }
+
+    void CreateLoot()
+    {
+        Road[] roadObjects = GameObject.FindObjectsOfType<Road>();
+
     }
 }

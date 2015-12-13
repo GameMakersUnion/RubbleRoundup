@@ -1,0 +1,8 @@
+credits
+=======
+Ian Nastajus - code & debugging, concept mechanic gameplay, concept sound effects, project management
+Will Carducci - code implementation
+Caitlin Stojanovski - art roads
+Sabrina Page - concept truck
+Oskar Pruski - art vehicles
+Chris Donnely - sound
