@@ -1,55 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &178972
+--- !u!1 &120086
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 434534}
-  - 114: {fileID: 11493896}
-  - 212: {fileID: 21203104}
+  - 4: {fileID: 479948}
+  - 114: {fileID: 11475858}
+  - 61: {fileID: 6165896}
+  - 212: {fileID: 21256318}
+  - 50: {fileID: 5029476}
   m_Layer: 0
-  m_Name: LanePrefab
+  m_Name: SwagPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &434534
+--- !u!4 &479948
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 178972}
+  m_GameObject: {fileID: 120086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.46258545, y: 1.55295336, z: .775600851}
+  m_LocalPosition: {x: -3.99544859, y: -2.40478897, z: 29.6087112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11493896
+--- !u!50 &5029476
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120086}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &6165896
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120086}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+--- !u!114 &11475858
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 178972}
+  m_GameObject: {fileID: 120086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7540d86784fcf674fa44b05b5f3570cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cf0cc3ff37704b49af99723a04bc49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneIndex: 0
-  numSpawns: 0
-  numLoots: 0
-  swagPrefab: {fileID: 11475858, guid: cf0282aecaddc43479f979f4f24fcd66, type: 2}
---- !u!212 &21203104
+  swagIndex: 0
+--- !u!212 &21256318
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 178972}
+  m_GameObject: {fileID: 120086}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,11 +106,14 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: swagPrefab
-      value: 
-      objectReference: {fileID: 11475858, guid: cf0282aecaddc43479f979f4f24fcd66,
-        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 178972}
+  m_RootGameObject: {fileID: 120086}
   m_IsPrefabParent: 1

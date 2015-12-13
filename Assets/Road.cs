@@ -107,7 +107,8 @@ public class Road : MonoBehaviour
         }
     }
 
-    private List<Lane> lanes = new List<Lane>();
+	[HideInInspector]
+    public List<Lane> lanes = new List<Lane>();
 
 
 	// Use this for initialization
@@ -161,6 +162,18 @@ public class Road : MonoBehaviour
         {
             throw new UnityException("Road needs a lane prefab!");
         }
+
+		InitLoot();
+	}
+
+	void InitLoot()
+	{
+		foreach (Lane lane in lanes)
+		{
+			lane.numSpawns = 1;
+			lane.numLoots = Random.Range(1, 5);
+			lane.Init();
+		}
 	}
 	
 	// Update is called once per frame
