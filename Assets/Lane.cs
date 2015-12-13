@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Lane : MonoBehaviour 
 {
-    public float laneIndex;
+	public float laneIndex;
 
 	public int numSpawns;
 	public int numLoots; //textures 
