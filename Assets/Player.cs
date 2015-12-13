@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     private float maxX = 6f;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
     {
 	    if(Main == null)
         {
