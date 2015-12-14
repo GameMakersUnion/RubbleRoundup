@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &193382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 425640}
+  - 114: {fileID: 11492516}
+  m_Layer: 0
+  m_Name: Engine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &425640
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .307471484, y: -10.3808651, z: 15.6572437}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11492516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce84559715236fd49a2f45eee7942d79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lanes:
+  - {fileID: 2800000, guid: 57f2c8edb11c9534e96548227e8477b5, type: 3}
+  - {fileID: 2800000, guid: 7927dfc22fd4022409e51aff664dae9c, type: 3}
+  - {fileID: 2800000, guid: 17bc68aab60dcae46860e27e7ded3f7f, type: 3}
+  curbs:
+  - {fileID: 2800000, guid: 92436ed7192ea24439b768500e2ac031, type: 3}
+  - {fileID: 2800000, guid: 7532c69bbefcb784381dd2f47994035b, type: 3}
+  loots:
+  - {fileID: 2800000, guid: c4a8344fbc399804ebd90bb6897b6359, type: 3}
+  - {fileID: 2800000, guid: baf43881398a88c4a9c6e2fbd9f7d384, type: 3}
+  - {fileID: 2800000, guid: c6ba3e82d4e43c84dadf932a2df68250, type: 3}
+  - {fileID: 2800000, guid: 1ebe8d3de574f5d49b2ccd6abeafe4a7, type: 3}
+  - {fileID: 2800000, guid: a5602c9f6fca54544a3e8780bd76f662, type: 3}
+  roadPrefab: {fileID: 11413186, guid: 0dc522fe233d0c44bb42f7303a9136a4, type: 2}
+  numberOfLanes: 5
+  numberOfRoadsBuffered: 3
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 193382}
+  m_IsPrefabParent: 1
