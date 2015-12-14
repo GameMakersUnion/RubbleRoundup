@@ -90,6 +90,7 @@ public class Road : MonoBehaviour
 		}
 	}
 
+
 	public Bounds DrivableRoadBounds
 	{
 		get
@@ -123,17 +124,17 @@ public class Road : MonoBehaviour
 		}
 	}
 
-	private List<Lane> lanes = new List<Lane>();
-
+	[HideInInspector]
+    public List<Lane> lanes = new List<Lane>();
 
 	// Use this for initialization
 	public void Init () 
-	{
+    {
 		if(lanePrefab)
 		{
 			int numLanes = Engine.Main.numberOfLanes;
 			float lastX = 0;
-			for(int i = 0; i < numLanes; i++)
+			for(uint i = 0; i < numLanes; i++)
 			{
 				Lane lane = Instantiate<Lane>(lanePrefab);
 				SpriteRenderer sr = lane.gameObject.GetComponent<SpriteRenderer>();
@@ -184,6 +185,17 @@ public class Road : MonoBehaviour
 		else
 		{
 			throw new UnityException("Road needs a lane prefab!");
+		}
+		InitLoot();
+	}
+
+	void InitLoot()
+	{
+		foreach (Lane lane in lanes)
+		{
+			lane.numSpawns = 1;
+			lane.numLoots = Random.Range(1, 5);
+			lane.Init();
 		}
 	}
 	

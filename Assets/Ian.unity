@@ -119,7 +119,12 @@ MonoBehaviour:
   curbs:
   - {fileID: 2800000, guid: 92436ed7192ea24439b768500e2ac031, type: 3}
   - {fileID: 2800000, guid: 7532c69bbefcb784381dd2f47994035b, type: 3}
-  loots: []
+  loots:
+  - {fileID: 2800000, guid: c4a8344fbc399804ebd90bb6897b6359, type: 3}
+  - {fileID: 2800000, guid: baf43881398a88c4a9c6e2fbd9f7d384, type: 3}
+  - {fileID: 2800000, guid: c6ba3e82d4e43c84dadf932a2df68250, type: 3}
+  - {fileID: 2800000, guid: 1ebe8d3de574f5d49b2ccd6abeafe4a7, type: 3}
+  - {fileID: 2800000, guid: a5602c9f6fca54544a3e8780bd76f662, type: 3}
   roadPrefab: {fileID: 11413186, guid: 0dc522fe233d0c44bb42f7303a9136a4, type: 2}
   numberOfLanes: 5
   numberOfRoadsBuffered: 3

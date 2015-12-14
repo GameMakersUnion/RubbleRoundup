@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Engine : MonoBehaviour {
 
@@ -38,8 +39,8 @@ public class Engine : MonoBehaviour {
 	}
 	
 	void Start () 
-	{
-		Road road = null;
+    {
+        Road road = null;
 		for (int i = 0; i < numberOfRoadsBuffered; i++)
 		{
 			Road temp = CreateNewRoadAhead();
@@ -61,29 +62,28 @@ public class Engine : MonoBehaviour {
 			Player.Main.transform.position = target;
 
 		}
-	}
+    }
 
-	[ExecuteInEditMode]
-	void OnValidate()
-	{
-		if(numberOfLanes < 4)
-		{
-			numberOfLanes = 4;
-		}
+    [ExecuteInEditMode]
+    void OnValidate()
+    {
+        if(numberOfLanes < 4)
+        {
+            numberOfLanes = 4;
+        }
 
-		if(numberOfRoadsBuffered < 1)
-		{
-			numberOfRoadsBuffered = 1;
-		}
-	}
+        if(numberOfRoadsBuffered < 1)
+        {
+            numberOfRoadsBuffered = 1;
+        }
+    }
 
-	public void SignalRoadDestroyed()
-	{
-		CreateNewRoadAhead();
-		CreateLoot();
-	}
+    public void SignalRoadDestroyed()
+    {
+        CreateNewRoadAhead();
+    }
 
-	private Road CreateNewRoadAhead()
+    private Road CreateNewRoadAhead()
 	{
 		Road[] roadObjects = GameObject.FindObjectsOfType<Road>();
 		Vector3? farthestPosition = null;
@@ -115,11 +115,5 @@ public class Engine : MonoBehaviour {
 		newRoad.transform.position = new Vector3(farthestPosition.Value.x, farthestPosition.Value.y + length, farthestPosition.Value.z);
 
 		return newRoad;
-	}
-
-	void CreateLoot()
-	{
-		Road[] roadObjects = GameObject.FindObjectsOfType<Road>();
-
 	}
 }
