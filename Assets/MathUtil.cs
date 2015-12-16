@@ -16,16 +16,27 @@ public static class MathUtil
 		}
 		else
 		{
-			int elementsToCopy = points.Length - 1;
-			Vector3[] points1 = new Vector3[elementsToCopy];
-			Vector3[] points2 = new Vector3[elementsToCopy];
-			Array.Copy(points, 1, points1, 0, elementsToCopy);
-			Array.Copy(points, 0, points2, 0, elementsToCopy);
-
-			Vector3 start = BezierInterpolation(t, points1);
-			Vector3 end = BezierInterpolation(t, points2);
+			Vector3 start = BezierInterpolation(t, ref points, 1, (uint)(points.Length - 1));
+			Vector3 end = BezierInterpolation(t, ref points, 0, (uint)(points.Length - 2));
 
 			return Vector3.Lerp(start, end, t);
 		}
+	}
+
+	private static Vector3 BezierInterpolation(float t, ref Vector3[] points, uint first, uint last)
+	{
+		if(first > last)
+		{
+			throw new UnityException("MathUtil.BezierInterpolation: first cannot be greater than last!");
+		}
+		else if(first == last)
+		{
+			return points[first];
+		}
+
+		Vector3 start = BezierInterpolation(t, ref points, first + 1, last);
+		Vector3 end = BezierInterpolation(t, ref points, first, last - 1);
+
+		return Vector3.Lerp(start, end, t);
 	}
 }
