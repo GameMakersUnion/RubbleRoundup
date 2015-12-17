@@ -14,13 +14,15 @@ public static class MathUtil
 		{
 			return points[0];
 		}
-		else
+		else if (points.Length == 2)
 		{
-			Vector3 start = BezierInterpolation(t, ref points, 1, (uint)(points.Length - 1));
-			Vector3 end = BezierInterpolation(t, ref points, 0, (uint)(points.Length - 2));
-
-			return Vector3.Lerp(start, end, t);
+			return Vector3.Lerp(points[0], points[1], t);
 		}
+
+		Vector3 start = BezierInterpolation(t, ref points, 0, (uint)(points.Length - 2));
+		Vector3 end = BezierInterpolation(t, ref points, 1, (uint)(points.Length - 1));
+
+		return Vector3.Lerp(start, end, t);
 	}
 
 	private static Vector3 BezierInterpolation(float t, ref Vector3[] points, uint first, uint last)
@@ -33,9 +35,13 @@ public static class MathUtil
 		{
 			return points[first];
 		}
+		else if (last - first == 1)
+		{
+			return Vector3.Lerp(points[first], points[last], t);
+		}
 
-		Vector3 start = BezierInterpolation(t, ref points, first + 1, last);
-		Vector3 end = BezierInterpolation(t, ref points, first, last - 1);
+		Vector3 start = BezierInterpolation(t, ref points, first, last - 1);
+		Vector3 end = BezierInterpolation(t, ref points, first + 1, last);
 
 		return Vector3.Lerp(start, end, t);
 	}
